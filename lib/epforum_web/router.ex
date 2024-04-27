@@ -1,5 +1,6 @@
 defmodule EpforumWeb.Router do
   use EpforumWeb, :router
+  use Plug.ErrorHandler
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -12,6 +13,7 @@ defmodule EpforumWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CORSPlug, origin: "*"
   end
 
   scope "/", EpforumWeb do
@@ -24,6 +26,7 @@ defmodule EpforumWeb.Router do
   scope "/api/", EpforumWeb do
     pipe_through :api
     resources "/posts", PostController, except: [:new, :edit]
+    resources "/todos", TodoController, except: [:new, :edit]    # options "/*path", CORSPlug # Respond to preflight requests
   end
 
   # Other scopes may use custom stacks.

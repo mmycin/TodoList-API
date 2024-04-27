@@ -50,4 +50,6 @@ defmodule EpforumWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug EpforumWeb.Router
+  plug CORSPlug, origin: "*",  methods: [:get, :post, :put, :patch, :delete, :options]
+  plug Corsica, origins: "*", allow_credentials: true
 end

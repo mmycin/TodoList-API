@@ -19,6 +19,7 @@ config :epforum, EpforumWeb.Endpoint,
     formats: [html: EpforumWeb.ErrorHTML, json: EpforumWeb.ErrorJSON],
     layout: false
   ],
+  debug_errors: false,
   pubsub_server: Epforum.PubSub,
   live_view: [signing_salt: "K15NYD1T"]
 

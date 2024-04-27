@@ -15,6 +15,8 @@ defmodule EpforumWeb.PostController do
     with {:ok, %Post{} = post} <- Posts.create_post(post_params) do
       conn
       |> put_status(:created)
+      |> put_resp_header("access-control-allow-origin", "*")
+      |> put_resp_header("content-security-policy", "default-src 'self'")
       |> put_resp_header("location", ~p"/api/posts/#{post}")
       |> render(:show, post: post)
     end
